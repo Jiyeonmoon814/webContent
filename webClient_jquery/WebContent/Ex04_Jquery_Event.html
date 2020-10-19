@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			  $('#btncopy').click(function(){
+				  //let data = $('#txtuserid').val();
+				  //$('#txtcopyuserid').val(data);
+				  $('#txtcopyuserid').val($('#txtuserid').val());
+			  });
+			  //select tag : change()
+			  $('#select_hobby').change(function(){
+				const text=$(':selected').text();
+				const text2=$('#select_hobby option:selected').text();
+				const val = $('#select_hobby').val();
+				//value 속성이 없으면 text를 value로 인정
+				console.log(text+"/"+text2+"/"+val);
+			  });
+			  $('#txtpwd2').keyup(function(){
+				const txtpwd = $('#txtpwd').val();
+
+				if($('#txtpwd').val()!=$('#txtpwd2').val()){
+					$('#message').text('<h3>Wrong password</h3>');
+				}else{
+					$('#message').html('<h3>Corrct password</h3>');
+				}
+			  });
+			  console.log($('input')); //body 안에 있는 모든 input tag 
+			  $('input').focus(function(){
+				console.log($(this)); //선택한 input tag의 정보를 얻을 수 있음 
+				$(this).css('background-color','grey');
+			  });
+
+			  $('input').blur(function(){//focus가 떠날 때 
+				console.log($(this)); //선택한 input tag의 정보를 얻을 수 있음 
+				$(this).css('background-color','white');
+			  });
+			  //toggle과 같은 원리를 가지고 있는 event 
+			  //한개의 event가 두개의 함수를 갖는 것 
+			  $('p').hover(function(){
+				$(this).css('background-color','violet');
+			  },function(){
+				$(this).css('background-color','pink');
+			  });
+
+			  
+		});
+	</script>
+</head>
+<body>
+	<p>Jquery hover(mouseover , mouseleave)</p>
+	
+	ID:<input type="text" id="txtuserid">
+	<hr>
+	<input type="button" id="btncopy" value="copy">
+	<hr>
+	Copy ID:<input type="text" id="txtcopyuserid">
+	
+	<hr>
+	<select id="select_hobby">
+		<option value="JAVA">java</option>
+		<option> script</option>
+		<option>jdbc</option>
+	</select>
+	<br>
+	<input type="text" id="txtselect">
+	<hr>
+	<table style="border: 1px solid red;">
+		<tr>
+			<td>암호</td>
+			<td>
+				<input type="text" id="txtpwd" size="20" maxlength="5">
+			</td>
+		</tr>
+		<tr>
+			<td>암호확인</td>
+			<td>
+				<input type="text" id="txtpwd2" size="20" maxlength="5">
+			</td>
+		</tr>
+	</table>
+	<div id="message" style="color: red"></div>
+</body>
+</html>

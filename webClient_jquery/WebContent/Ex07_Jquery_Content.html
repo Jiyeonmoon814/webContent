@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Content</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('#btn1').click(function(){
+				alert("text:"+$('#test').text()); //getter text
+			});
+
+			$('#btn2').click(function(){
+				alert("text:"+$('#test').html()); //getter text+tag
+			});
+
+			$('#btn3').click(function(){
+				$('#test').html("<div>HI THERE</div>");
+			});
+		})
+	</script>
+</head>
+<body>
+	<p id="test">안녕하세요<b>정말</b>방가방가</p>
+	<button id="btn1">show text</button>
+	<button id="btn2">show html</button>
+	<button id="btn3">html</button>
+	
+</body>
+</html>
+
+

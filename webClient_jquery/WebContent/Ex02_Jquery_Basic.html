@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	/*
+	js dom 표현
+	
+	window.onload = function () {
+		document.getElementById("btn").onclick=function(){
+			alert("DOM SCRIPT");
+		}
+	}
+	*/
+	
+	/* basci jquery 표현
+	
+	A $ sign to define/access jQuery
+	A (selector) to "query (or find)" HTML elements
+	A jQuery action() to be performed on the element(s)
+	
+	$(this).hide() - hides the current element.
+
+	$("p").hide() - hides all <p> elements.
+
+	$(".test").hide() - hides all elements with class="test".
+
+	$("#test").hide() - hides the element with id="test".
+	
+	$(document).ready(function(){//onload의 역할 
+		$('#btn').click(function(){
+			alert("jQuery")
+		});
+	});
+	*/
+	
+	/*더 간략한 jquery 표현*/
+	$(function(){
+		$('#btn').click(function(){
+			$(this).hide();
+		});
+	});
+</script>
+</head>
+<body>
+	<input type="button" id="btn" value="button">
+</body>
+</html>
