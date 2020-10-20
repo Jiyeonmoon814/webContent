@@ -16,11 +16,130 @@
     1.$(selector).each(function(){this활용});
     2.$(selector).each(function(index){this활용});
     3.$(selector).each(function(index, element){element}); --가장 많이 사용함 
+
+	jquery :
+    1.$.each(Array or Object,function(){this활용});
+    2.$.each(Array or Object,function(index){this활용});
+    3.$.each(Array or Object,function(index, element){element}); --가장 많이 사용함 
+
+	if parameter is json object
+	var obj = {name:"andy", age:28}
+	point ***
+	$(obj).each(function(key,value){});
+	$.each(obj,function(key,value){value});
+
+
 */
+
+$(document).ready(function(){
+		
+		//case 1. 
+		$('p').each(function(){
+			//callback 함수 3번 호출
+			console.log("this :"+$(this).text());
+		});
+		
+		//case 2.
+		$('p').each(function(index){
+			//callback 함수 3번 호출
+			//console.log("index : "+index);
+			//console.log("this : "+$(this).text());
+
+			//index 활용 >> 중복값이 없음
+			//$(this).attr("id","param-"+index);
+			//응용() attr >> 속성을 여러개 부여 >> jquery parameter json object 
+			$(this).attr(
+				{
+					"id":"param-"+index,
+					"style":"color:red",
+				}
+			);
+		});
+		
+		//case 3.
+		$('p').each(function(index, element){
+			//callback 함수 3번 호출
+			console.log("index : "+index);
+			console.log(element); //문자랑 조합해서 찍어보면 다른거 나옴 
+			console.log("element :"+$(element).text());
+		});
+
+		$('#btn').click(function(){
+			alert($('#param-1').text());
+		});
+
+	/*
+		let arr = ['apple','pear','watermelon'];
+		let obj = {} JsonObj
+		let arrobj = [{},{},{}] ArrayObject 
+	*/
+		
+	var array=[
+		{"name":"naver","link":"www.naver.com"},
+		{"name":"daum","link":"www.daum.com"},
+		{"name":"bit","link":"www.bit.or.kr"}
+	];
+
+	 //문제
+		   // $.each(Array or Object , function(index , element){ element}); 
+		   //활용해서  name  값 , link 값을 출력하세요
+		   $.each(array , function(index , element){
+				//console.log(index);
+				console.log(element);  //객체.속성명 , 객체["속성명"]
+			    console.log(element.name + " / " + element["link"]);
+			});
+
+	/*
+			$(array).each(function(index , element){
+				//console.log(index);
+				console.log(element);  //객체.속성명 , 객체["속성명"]
+			    console.log(element.name + " / " + element["link"]);
+			});
+		   */
+		   
+		   let boardobj = {
+				   values:[
+					   				{no:1 , title:"hello world"},
+					   				{no:2 , title:"korea"},
+					   				{no:3 , title:"bit world"}
+				               ],
+				   search:"검색"            
+		   }
+		   //1. $.each() 사용해서 no 값, title 값을 출력
+		   $.each(boardobj.values,function(index,element){
+			   console.log(index+"/"+element.no+","+element["title"]);
+		   });
+
+		   //2. $.each(board) >> key, value 출력
+		   $.each(boardobj,function(key,value){
+			   console.log(key+"/"+value);
+		   });
+
+		   //3.$.each() no, title, search 값 출력
+		   //hint)) each(){each(){}}
+		   $.each(boardobj,function(key,value){
+			   //value >> text, Array, {}
+			   //value type 비교 
+			   if(typeof(value)=="object"){
+				$.each(value,function(index,element){
+				console.log(index+"/"+element.no+","+element["title"]);
+				});
+			   }else{//text의 경우
+				console.log(key+"/"+value);
+			   }
+			});	 	
+	});
+
+
+
+	
 </script>
 
 </head>
 <body>
-
+    <p>java</p>
+	<p>jsp</p>
+	<p>oracle</p>
+	<input type="button" value="click" id="btn">
 </body>
 </html>
