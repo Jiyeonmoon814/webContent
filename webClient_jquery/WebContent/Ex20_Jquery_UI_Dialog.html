@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<!-- 필수 jquery.min.js -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Jquery UI >> css(디자인)  ,   js(이벤트 기능) -->
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/sunny/jquery-ui.css">
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript">
+			$(function(){
+				  $('#dialog').dialog(
+                  {
+                      autoOpen:false,
+                      show:{effect:"blind",duration:2000},
+                      hide:{effect:"explode",duration:1000}
+                  });
+                  $('#opener').click(function(){
+                      $('#dialog').dialog("open");
+                  });
+			});
+	</script>
+</head>
+<body>
+		<p>CONTENT</p>
+		<button id="opener">open popup</button>
+		<div id="dialog" title="Basic dialog">
+  			<p>오늘은 수요일</p>
+		</div>
+</body>
+</html>

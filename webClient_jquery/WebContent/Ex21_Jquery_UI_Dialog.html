@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<!-- 필수 jquery.min.js -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Jquery UI >> css(디자인)  ,   js(이벤트 기능) -->
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/sunny/jquery-ui.css">
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript">
+			$(function(){
+				$('#datepicker').datepicker(
+					{dateFormat:"yy년 mm월 dd일"}
+				);
+				  $('#dialog').dialog(
+                  {
+                      autoOpen:false,
+                      show:{effect:"blind",duration:2000},
+                      hide:{effect:"explode",duration:1000},
+					  buttons:{
+						"conirm":function(){$(this).dialog('close')},
+						"cancel":function(){$(this).dialog('close')},  
+						  },
+						resizable:false,
+						modal:true //팝업을 닫기 전까지는 부모창 접근 작업이 불가능. 
+                  });
+                  $('#opener').click(function(){
+                      $('#dialog').dialog("open");
+                  });
+			});
+	</script>
+</head>
+<body>
+		<p>CONTENT</p>
+		Date:<input type="text" id="datepicker">
+		<hr>
+		<button id="opener">open popup</button>
+		<div id="dialog" title="Basic dialog">
+  			<p>오늘은 수요일</p>
+		</div>
+</body>
+</html>
