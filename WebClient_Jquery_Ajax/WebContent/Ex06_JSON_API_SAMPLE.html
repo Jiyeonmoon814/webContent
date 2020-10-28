@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		//https://api.flickr.com/services/feeds/photos_public.gne?tags=raccoon&tagmode=any&format=json&jsoncallback=?
+		//tags=입력값&tagmode=any&format=json
+		//"https://api.flickr.com/services/feeds/" + $('#name').val() + "/10
+				
+				$(function(){
+					$('#btn').click(function(){
+				$('#libInfo').empty()
+				$.ajax({
+					type : "GET",
+					url : "http://openapi.seoul.go.kr:8088/6a72706b5970737537385a79714e4e/json/SeoulSmallLibraryInfo/1/900/",
+					data : {},
+					success : function(responsedata){
+						let library = responsedata["SeoulSmallLibraryInfo"]["row"]
+						for(i=0;i<library.length;i++){
+							let district = library[i]["CODE_VALUE"];
+							let libName = library[i]["LBRRY_NAME"];
+							let address = library[i]["ADRES"];
+							if(district==$('#search').val()){
+								//console.log(libName);
+								$('#libInfo').append("<li>"+libName+" : "+address+"</li><br>");
+							}}
+						
+					}
+				});
+				});
+				});
+	</script>
+</head>
+<body>
+<!--  
+https://api.flickr.com/services/feeds/photos_public.gne?tags=raccoon&tagmode=any&format=json&jsoncallback=?
+-->
+	<input type="text" id="search" placeholder="e.g.송파구, 용산구">
+	<input type="button" value="도서관조회" id="btn">
+	<hr>
+	<div id="libInfo"></div>
+	<div id="tempHtml"></div>
+</body>
+</html>
+

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+/* 
+	low-level interface async function (jquery.ajax(),$.ajax())
+	jquery.ajax(url,[,settings])
+	
+	url : 요청 주소
+	settings >> 여러개의 옵션을 사용할 수 있도록 >> {json 객체}
+	
+	옵션 : dataType >> 서버가 클라이언트에게 응답하는 데이터 형식
+	The type of data that you're expecting back from the server. 
+	If none is specified, jQuery will try to infer it based on the MIME type of the response 
+	(an XML MIME type will yield XML, in 1.4 JSON will yield a JavaScript object, in 1.4 script will execute the script, 
+	and anything else will be returned as a string). 
+	
+	Text : json, script, html, text (responseText)
+	xml :                               (responseXml)
+*/
+
+
+	$(function(){
+		$('#message').click(function(){
+			$.ajax({
+				url:"Ex02_menu.html",
+				dataType:"html", //서버가 응답하는 데이터 형식
+				success : function(responsedata){
+					//서버에서 정상적인 응답(200)이 오면
+					//li tag data만 가져오도록 가공할 경우
+					$('#menudiv').html($(responsedata).find('li'));
+					//전체를 다 가져올 경우
+					//$('#menudiv').html(responsedata);
+				}
+			});
+		});
+	});
+</script>
+<style type="text/css">
+	#menudiv{
+		width:300px;
+		height:300px;
+		float:left;
+		margin:3px;
+		background-color: coral;
+		}
+</style>
+</head>
+<body>
+	<div id="menudiv">
+		<a href="#" id="menu1">
+		</a>
+	</div>
+	<span id="message">Click Me!</span>
+</body>
+</html>
