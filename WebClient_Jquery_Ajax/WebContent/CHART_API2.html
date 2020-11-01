@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Air Quality</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<link rel="stylesheet" href="chart.css">
+<script type="text/javascript">
+	$(function(){
+		const district =[];
+		const pm10 =[];
+		const pm25 =[];
+		
+		$.getJSON("http://openapi.seoul.go.kr:8088/434b4345516d6a79323957686a745a/json/MonthlyAverageAirQuality/30/35/202010/",function(data){
+			$.each(data.MonthlyAverageAirQuality.row,function(index,obj){
+					district.push(obj.MSRSTE_NM);
+					pm10.push(obj.PM10);
+					pm25.push(obj.PM25);
+				
+				//console.log(PM25);
+			});//EACH문 끝 
+			
+			$('#container').highcharts({
+				chart: {
+			        type: 'bar'
+			    },
+			    title: {
+			        text: 'Air Quality in Oct at Seoul'
+			    },
+			    subtitle: {
+			        text: 'Source: <a href="https://data.seoul.go.kr/">서울 열린 데이터 광장</a>'
+			    },
+			    xAxis: {
+			        categories: district,
+			        title: {
+			            text: null
+			        }
+			    },
+			    yAxis: {
+			        min: 0,
+			        max:200,
+			        title: {
+			            text: '대기오염농도 (단위:㎍/㎥)',
+			            align: 'high'
+			        },
+			        labels: {
+			            overflow: 'justify'
+			        }
+			    },
+			    tooltip: {
+			        valueSuffix: '㎍/㎥'
+			    },
+			    plotOptions: {
+			        bar: {
+			            dataLabels: {
+			                enabled: true
+			            }
+			        }
+			    },
+			    legend: {
+			        layout: 'vertical',
+			        align: 'right',
+			        verticalAlign: 'top',
+			        x: -40,
+			        y: 80,
+			        floating: true,
+			        borderWidth: 1,
+			        backgroundColor:
+			            Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+			        shadow: true
+			    },
+			    credits: {
+			        enabled: false
+			    },
+			    series: [
+			    	{
+			        name: 'pm10',
+			        data: pm10
+			    },{
+			        name: 'pm25',
+			        data: pm25
+			    }]
+			});//hightchart
+		});//getJSON
+	});
+</script>
+</head>
+<body>
+<figure class="highcharts-figure">
+    <div id="container"></div>
+    <p class="highcharts-description">
+        Bar chart showing monthly average air quality in Oct 2020 at Seoul
+    </p>
+</figure>
+</body>
+</html>
