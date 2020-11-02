@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css">
+<script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+	<div class="container">
+		<div class="header">
+			<h2>Create Account</h2>
+		</div>
+	
+	<form class="form" id="form" method="post" action="loginForm.jsp">
+		<div class="form-control success">
+			<label>UserID</label>
+			<input type="text" placeholder="UserName" id="username">
+			<i class="fas fa-check-circle"></i>
+			<i class="fas fa-exclamation-circle"></i>
+			<small>Error message</small>
+		</div>
+
+
+		<div class="form-control error">
+			<label>Email</label>
+			<input type="email" placeholder="Email@email.com" id="email">
+			<i class="fas fa-check-circle"></i>
+			<i class="fas fa-exclamation-circle"></i>
+			<small>Error message</small>
+		</div>
+
+		<div class="form-control error">
+			<label>Password</label>
+			<input type="password" placeholder="password" id="pwd">
+			<i class="fas fa-check-circle"></i>
+			<i class="fas fa-exclamation-circle"></i>
+			<small>Error message</small>
+		</div>
+
+		<div class="form-control error">
+			<label>Password Check</label>
+			<input type="password" placeholder="Password Check" id="pwdCheck">
+			<i class="fas fa-check-circle"></i>
+			<i class="fas fa-exclamation-circle"></i>
+			<small>Error message</small><br>
+		</div>
+		<button>Submit</button>
+	</form>
+</div>
+
+
+	<script type="text/javascript">
+		const form=document.getElementById('form');
+		const username=document.getElementById('username');
+		const email=document.getElementById('email');
+		const pwd=document.getElementById('pwd');
+		const pwdCheck=document.getElementById('pwdCheck');
+
+		form.addEventListener('submit',(e)=>{
+			e.preventDefault();
+			checkInputs();
+		});
+
+		function checkInputs(){
+			//get the value from the inputs
+			const checkUser=username.value.trim();
+			const checkEmail=email.value.trim();
+			const checkPwd=pwd.value.trim();
+			const checkPwd2=pwdCheck.value.trim();
+			
+			if(checkUser===''){
+				//show error
+				//add error class
+				setErrorFor(username, 'UserName cnanot be blank');
+			}else {
+				//add success class
+				setSuccessFor(username);
+			}
+
+			if(checkEmail===''){
+				//show error
+				//add error class
+				setErrorFor(email, 'Email cnanot be blank');
+			}else if(!isEmail(checkEmail)){
+				setErrorFor(email, 'Email is not valid')
+			}else {
+				//add success class
+				setSuccessFor(email);
+			}
+		}
+		
+		function setErrorFor(input, message){
+			const formControl = input.parentElement; //.form-control
+			const small = formContorl.querySelector('small');
+			
+			//add error msg insdie small
+			small.innerText = message;
+			
+			//add error class
+			formControl.className='form-control error';
+		}
+
+		function isEmail(email){
+			return /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i.test(email);
+		}
+	</script>
+
+</body>
+</html>
